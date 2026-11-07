@@ -1,6 +1,6 @@
 // English Quest — offline shell. The page is always fetched from the network first (so updates arrive at once);
 // the cached copy is used only without internet. Voice models live in IndexedDB; AI requests are never cached.
-const CACHE = "eq-shell-v1";
+const CACHE = "eq-shell-v15";
 const SHELL = ["./", "index.html", "manifest.webmanifest", "icon-192.png", "icon-512.png", "apple-touch-icon.png"];
 self.addEventListener("install", (e) => { e.waitUntil(caches.open(CACHE).then((c) => c.addAll(SHELL)).then(() => self.skipWaiting())); });
 self.addEventListener("activate", (e) => { e.waitUntil(caches.keys().then((ks) => Promise.all(ks.filter((k) => k !== CACHE).map((k) => caches.delete(k)))).then(() => self.clients.claim())); });
